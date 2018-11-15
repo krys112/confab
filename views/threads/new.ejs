@@ -1,0 +1,26 @@
+<% include ../partials/header %>
+<div class="container">
+<h1>Create new thread</h1>
+
+<form action="/threads" method="POST" enctype="multipart/form-data">
+	<div class="form-group">
+		<label for="subject">Subject</label>
+		<input class="form-control" type="text" id="subject" name="name">
+	</div>
+	<div class="form-group">
+		<label for="name">Name</label>
+		<input class="form-control" type="text" placeholder="Anonymous" id="name" name="author">
+	</div>
+	<div class="form-group">
+		<label for="image">Image</label>
+		<input class="form-control" type="file" id="image" name="myimage" required>
+	</div>
+	<div class="form-group">
+		<label for="desc">Comment</label>
+		<textarea class="form-control" rows="5" id="desc" name="description" required></textarea>
+	</div>
+		<button class="btn btn-lg btn-primary btn-block">Submit!</button>
+</form>
+</div>
+
+<% include ../partials/footer %>

@@ -1,0 +1,66 @@
+		<% include ../partials/header %>
+
+		<div class="container"><h1>All Threads</h1>
+
+			<div  style="display:flex; flex-direction: column;">
+			<% threads.forEach(function(thread) { %>
+				<div class="border-top border-primary">
+					<div  style="display:block;">
+							<img src="<%= thread.image %>" class="img-thumbnail" style="float:left;"></i>
+					</div>
+					<div style="display: block;">
+						<span>Anonymous <em><%= new Date();%></em></span>
+						<span></span>
+					</div>
+					<h3><%= thread.name%></h3>
+					
+					<span class=""><%=thread.description %></span>
+					<div class="text-right">
+						<a href="/threads/<%= thread._id%>" class="btn btn-primary">View Thread</a>
+					</div>
+				</div>
+		<% }); %>
+		</div>
+
+		<!--
+
+				// EXPERIMENTING
+				<% threads.slice().reverse().forEach(function(thread) { %>
+					<div class="thread">
+						<a href="<%= thread.image%>"><img src="<%= thread.image %>" class="img-thumbnail" style="float:left;"></a>
+						<a href="/img/<%= thread.myimage%>"><img src="/uploads/<%= thread.myimage%>" class="img-thumbnail" style="float:left;"></a></i>
+						<span>
+							<% if(thread.author == "") {thread.author = "Anonymous";}%> 
+							<%= thread.author%> 
+							<em><%= thread.date %></em>
+							No.<%= thread.postNo%>
+							<a href="/threads/<%= thread._id%>" class="btn btn-primary vthread">View Thread</a>
+						</span>
+						<h3><%= thread.name%></h3>
+						<span class=""><%=thread.description %></span>
+					</div>
+					<% var i = (thread.comments.length - 4); 
+						if(i < 0) {i = 0; } %>
+					<% for(i; i < thread.comments.length; i++) {%>
+					<div class="reply">
+						<% var comment = thread.comments[i]%>
+						<% console.log("so comment is "+i);%>
+						<a href="<%= comment.image%>"><img src="<%= comment.image %>" class="img-thumbnail" style="float:left;"></a></i>
+						<span>
+							<% if(comment.author == "") {comment.author = "Anonymous";}%>
+							<%= comment.author%> 
+							<em><%= comment.date%></em>
+							No.<%= comment.postNo%> 
+							<a href="/threads/<%= thread._id%>" class="btn btn-danger vthread">Report</a>
+						</span>
+						<% console.log("hey " + comment.image + thread.name);%>
+						<p class=""><%=comment.description %></p>
+					</div>
+				<% } %>
+					<% console.log("comments are " +thread.comments.length);%>
+				<% }); %>
+			-->
+
+		<a href="/threads/new">Make Thread</a>
+
+		</div>

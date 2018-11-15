@@ -1,0 +1,56 @@
+<% include ../partials/header %>
+		<div class="wrapper">
+			<div class="side">
+			</div>
+			<div class="content"><h1>Viewing Thread</h1>
+				<div class="thread">
+					<a href="<%= thread.image%>"><img src="<%= thread.image %>" class="img-thumbnail" style="float:left;"></a>
+					<a href="/img/<%= thread.myimage%>"><img src="/uploads/<%= thread.myimage%>" class="img-thumbnail" style="float:left;"></a></i>
+					<span>
+						<% if(thread.author == "") {thread.author = "Anonymous";}%> 
+						<span class="author"><%= thread.author%></span>
+						<em><%= thread.date %></em>
+						No.<%= thread.postNo%>
+						<form class="vthread" action="/threads/<%=thread._id%>?_method=DELETE" method="POST">
+							<% if(currentUser) {%>
+							<button class="btn btn-danger">Delete Thread</button>
+							<% } %>
+						</form>
+					</span>
+					<h3><%= thread.name%></h3>
+					<span class=""><%=thread.description %></span>
+					<% thread.comments.forEach(function(comment) { %>
+					<div class="reply">
+						<span>
+							<% if(comment.author == "") {comment.author = "Anonymous";}%>
+							<span class="author"><%= comment.author%></span>
+							<em><%= comment.date%></em>
+							No.<%= comment.postNo%> 
+							<form class="vthread" action="/threads/<%=thread._id%>/comments/<%= comment._id%>?_method=DELETE" method="POST">
+								<% if(currentUser) {%>
+									<button class="btn btn-xs btn-danger">Delete</button>
+								<% } %>
+							</form>
+						</span><br>
+						<% if(comment.image) {%>
+									<a href="/img/<%= comment.image%>"><img src="/uploads/<%=comment.image%>" class="img-thumbnail" style="float:left;"></a></i>
+						<% } %>
+						<% var str = comment.description%>
+						<p id="link"><%=str %></p>
+
+						<!--
+						<% //var n = str.search(/>>[0-9]*/);%>
+						<% //var txt = document.getElementById("link");%>
+						<% //txt.innerHTML = str.replace(/>>[0-9]*/, '<a href="\$&"</a>');
+
+						%>
+						<p class=""><%=//txt %></p> -->
+					</div>
+				<% }); %>
+				</div>
+
+				<a href=/threads/<%=thread._id%>/comments/new class="btn btn-primary">Reply</a>
+			</div>
+		</div>
+			
+<% include ../partials/footer %>

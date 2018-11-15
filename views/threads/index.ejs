@@ -1,0 +1,117 @@
+		<% include ../partials/header %>
+		<div class="wrapper">
+			<div class="side"></div>
+			<div class="show"><h1>All Threads</h1>
+				<% if(threads.length > 0) {%>
+				<% var commentNo = comments.length - 1;%>
+				<% var threadNo = threads.length - 1;%>
+				<% var usedThreads = [];%>
+				<% var j;%>
+				<% for(var j = counter[0].totalPosts; j > 0; j--) {%>
+				<% console.log("j is" +j + " commentno is "+commentNo );%>
+					<% if(comments.length >= 0 && comments[commentNo].postNo == j) {%>
+						<% var threadCount = counter[0].threadCounter;%>
+						<% var threadIndex = threadCount.indexOf(comments[commentNo].threadNo);%>
+						<% if(!usedThreads.includes(threadIndex) && threadIndex >= 0) {%>
+							<% var thread = threads[threadIndex];%>	
+							<div class="thread">
+								<% var size = (thread.size/1000).toFixed(1);%>
+								<% if(size>1000) {%>
+									<% size = (size/1000).toFixed(1);%>
+									<% var unit = "MB";%>
+								<% } else { var unit = "KB"; }%>
+								<span>File: <a href="/img/<%=thread.myimage%>"><%= thread.filename%></a> (<%=thread.width%>x<%=thread.height%>, <%=size%> <%=unit%>)</span><br>
+								<% var number = thread.size%>
+								<% console.log("kb size is "+(number/1000).toFixed(1));%>
+								<a href="<%= thread.image%>"><img src="<%= thread.image %>" class="img-thumbnail" style="float:left;"></a>
+								<a href="/img/<%= thread.myimage%>"><img src="/uploads/<%= thread.myimage%>" class="img-thumbnail" style="float:left;"></a></i>
+								<span>
+									<% if(thread.author == "") {thread.author = "Anonymous";}%> 
+									<span class="subject"><%= thread.name%></span>
+									<span class="author"><%= thread.author%></span>
+									<em><%= thread.date %></em>
+									No.<%= thread.postNo%>
+									<a href="/threads/<%= thread._id%>" class="btn btn-primary vthread">View Thread</a>
+								</span><br>
+								<span class=""><%=thread.description %></span>
+								<% var i = (thread.comments.length - 4); 
+							if(i < 0) {i = 0; } %>
+							<% for(i; i < thread.comments.length; i++) {%>
+							<div class="reply">
+									<% var comment = thread.comments[i]%>
+								<% if(comment.image) {%>
+									<a href="/img/<%= comment.image%>"><img src="/uploads/<%=comment.image%>" class="img-thumbnail" style="float:left;"></a></i>
+								<% } %>
+								<span>
+									<% if(comment.author == "") {comment.author = "Anonymous";}%>
+									<span class="author"><%= comment.author%></span>
+									<em><%= comment.date%></em>
+									No.<%= comment.postNo%> 
+									<form class="vthread" action="/threads/<%=thread._id%>/comments/<%= comment._id%>?_method=DELETE" method="POST">
+										<% if(currentUser) {%>
+											<button class="btn btn-xs btn-danger">Delete</button>
+										<% } %>
+									</form>
+								</span>
+								<p class="desc"><%=comment.description %></p>
+							</div>
+							<% } %>
+							</div>
+							
+							<% usedThreads.push(threadIndex);%>
+						<% } %>
+						<% if(commentNo != 0) {commentNo--;} %>
+					<% } else if(threads[threadNo].postNo == j){%>
+						<% if(!usedThreads.includes(threadNo)) {%>
+							<% var thread = threads[threadNo];%>
+							<div class="thread">
+								<% var size = (thread.size/1000).toFixed(1);%>
+								<% if(size>1000) {%>
+									<% size = (size/1000).toFixed(1);%>
+									<% var unit = "MB";%>
+								<% } else { var unit = "KB"; }%>
+								<span>File: <a href="/img/<%=thread.myimage%>"><%= thread.filename%></a> (<%=thread.width%>x<%=thread.height%>, <%=size%> <%=unit%>)</span><br>
+								<% var number = thread.size%>
+								<% console.log("kb size is "+(number/1000).toFixed(1));%>
+								<a href="<%= thread.image%>"><img src="<%= thread.image %>" class="img-thumbnail" style="float:left;"></a>
+								<a href="/img/<%= thread.myimage%>"><img src="/uploads/<%= thread.myimage%>" class="img-thumbnail" style="float:left;"></a></i>
+								<span>
+									<% if(thread.author == "") {thread.author = "Anonymous";}%> 
+									<span class="subject"><%= thread.name%></span>
+									<span class="author"><%= thread.author%></span>
+									<em><%= thread.date %></em>
+									No.<%= thread.postNo%>
+									<a href="/threads/<%= thread._id%>" class="btn btn-primary vthread">View Thread</a>
+								</span><br>
+								<span class=""><%=thread.description %></span>
+							</div>
+							<% var i = (thread.comments.length - 4); 
+							if(i < 0) {i = 0; } %>
+							<% for(i; i < thread.comments.length; i++) {%>
+							<div class="reply">
+								<% var comment = thread.comments[i]%>
+								<% if(comment.image) {%>
+									<a href="/img/<%= comment.image%>"><img src="/uploads/<%=comment.image%>" class="img-thumbnail" style="float:left;"></a></i>
+								<% } %>
+								<span>
+									<% if(comment.author == "") {comment.author = "Anonymous";}%>
+									<%= comment.author%> 
+									<em><%= comment.date%></em>
+									No.<%= comment.postNo%> 
+									<form class="vthread" action="/threads/<%=thread._id%>/comments/<%= comment._id%>?_method=DELETE" method="POST">
+										<% if(currentUser) {%>
+											<button class="btn btn-xs btn-danger">Delete</button>
+										<% } %>
+									</form>
+								</span>
+								<p class="desc"><%=comment.description %></p>
+							</div>
+							<% } %>
+							<% usedThreads.push(threadNo);%>
+						<% } %>
+						<% if(threadNo != 0) {threadNo--;} %>
+					<% }%>
+				<% }%>
+				<% } %>
+			</div>
+		</div>
