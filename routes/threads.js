@@ -71,9 +71,19 @@ router.post("/", uploading.single('myimage'), function(req, res) {
 					console.log(err);
 				} else {
 					// Increase post count by one, also add post number to array of existing threads
-					num = number[0].totalPosts + 1;
-					threadCount = number[0].threadCounter;
-					threadCount.push(num);
+					if(number.length > 0) {
+						num = number[0].totalPosts + 1;
+						threadCount = number[0].threadCounter;
+						threadCount.push(num);
+					} else {
+						num = 1;
+						threadCount.push(num);
+						Counter.create({totalPosts: num, threadCounter: threadCount}, function(err, counter) {
+							if(err) {
+								console.log(err);
+							}
+						});
+					}
 					newThread = {name: name, author: author, filename: filename, myimage: myimage, width: width, height: height, size: size, description: desc, postNo: num};
 					Counter.updateMany({totalPosts: num, threadCounter: threadCount}, function(err, post) {
 						if(err) {
