@@ -48,6 +48,10 @@ app.use("/threads", threadRoutes);
 app.use("/threads/:id/comments", commentRoutes);
 
 // Assigning app to an open port
-app.listen(3000, function() {
+let port = process.env.PORT;
+if (port == null || port == "") {
+	port = 3000;
+}
+app.listen(port, function() {
 	console.log("Server has been started");
 });
