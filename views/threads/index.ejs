@@ -9,7 +9,7 @@
 				<% var j;%>
 				<% for(var j = counter[0].totalPosts; j > 0; j--) {%>
 				<% console.log("j is" +j + " commentno is "+commentNo );%>
-					<% if(comments.length >= 0 && comments[commentNo].postNo == j) {%>
+					<% if(comments.length > 0 && comments[commentNo].postNo == j) {%>
 						<% var threadCount = counter[0].threadCounter;%>
 						<% var threadIndex = threadCount.indexOf(comments[commentNo].threadNo);%>
 						<% if(!usedThreads.includes(threadIndex) && threadIndex >= 0) {%>
