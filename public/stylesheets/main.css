@@ -80,3 +80,9 @@ span {
 .subject {
 	color: #8B0000;
 }
+
+.fa-trash-alt {
+	color: red;
+	background-color: #ccc;
+	border: none;
+}

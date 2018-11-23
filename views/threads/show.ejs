@@ -20,7 +20,11 @@
 						<span class="author"><%= thread.author%></span>
 						<em><%= thread.date %></em>
 						No.<%= thread.postNo%>
-						<a href="/threads/<%= thread._id%>" class="btn btn-primary vthread">View Thread</a>
+						<form class="vthread" action="/threads/<%=thread._id%>?_method=DELETE" method="POST">
+							<% if(currentUser) {%>
+								<button class="btn btn-xs btn-danger">Delete Thread</button>
+							<% } %>
+						</form>
 					</span><br>
 					<span class=""><%=thread.description %></span>
 					<% thread.comments.forEach(function(comment) { %>
@@ -32,7 +36,7 @@
 							No.<%= comment.postNo%> 
 							<form class="vthread" action="/threads/<%=thread._id%>/comments/<%= comment._id%>?_method=DELETE" method="POST">
 								<% if(currentUser) {%>
-									<button class="btn btn-xs btn-danger">Delete</button>
+									<button class="fas fa-trash-alt"></button>
 								<% } %>
 							</form>
 						</span><br>

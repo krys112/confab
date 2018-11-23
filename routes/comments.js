@@ -75,7 +75,7 @@ router.delete("/:comment_id", middleware.isLoggedIn, function(req, res) {
 		if(err) {
 			res.redirect("back");
 		} else {
-			res.redirect("/threads/" + req.params.id);
+			res.redirect("back");
 		}
 	});
 });

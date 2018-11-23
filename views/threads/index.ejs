@@ -23,7 +23,6 @@
 								<span>File: <a href="/img/<%=thread.myimage%>"><%= thread.filename%></a> (<%=thread.width%>x<%=thread.height%>, <%=size%> <%=unit%>)</span><br>
 								<% var number = thread.size%>
 								<% console.log("kb size is "+(number/1000).toFixed(1));%>
-								<a href="<%= thread.image%>"><img src="<%= thread.image %>" class="img-thumbnail" style="float:left;"></a>
 								<a href="/img/<%= thread.myimage%>"><img src="/uploads/<%= thread.myimage%>" class="img-thumbnail" style="float:left;"></a></i>
 								<span>
 									<% if(thread.author == "") {thread.author = "Anonymous";}%> 
@@ -49,7 +48,7 @@
 									No.<%= comment.postNo%> 
 									<form class="vthread" action="/threads/<%=thread._id%>/comments/<%= comment._id%>?_method=DELETE" method="POST">
 										<% if(currentUser) {%>
-											<button class="btn btn-xs btn-danger">Delete</button>
+											<button class="fas fa-trash-alt"></button>
 										<% } %>
 									</form>
 								</span>
@@ -57,7 +56,7 @@
 							</div>
 							<% } %>
 							</div>
-							
+							<hr>
 							<% usedThreads.push(threadIndex);%>
 						<% } %>
 						<% if(commentNo != 0) {commentNo--;} %>
@@ -73,7 +72,6 @@
 								<span>File: <a href="/img/<%=thread.myimage%>"><%= thread.filename%></a> (<%=thread.width%>x<%=thread.height%>, <%=size%> <%=unit%>)</span><br>
 								<% var number = thread.size%>
 								<% console.log("kb size is "+(number/1000).toFixed(1));%>
-								<a href="<%= thread.image%>"><img src="<%= thread.image %>" class="img-thumbnail" style="float:left;"></a>
 								<a href="/img/<%= thread.myimage%>"><img src="/uploads/<%= thread.myimage%>" class="img-thumbnail" style="float:left;"></a></i>
 								<span>
 									<% if(thread.author == "") {thread.author = "Anonymous";}%> 
@@ -85,31 +83,10 @@
 								</span><br>
 								<span class=""><%=thread.description %></span>
 							</div>
-							<% var i = (thread.comments.length - 4); 
-							if(i < 0) {i = 0; } %>
-							<% for(i; i < thread.comments.length; i++) {%>
-							<div class="reply">
-								<% var comment = thread.comments[i]%>
-								<% if(comment.image) {%>
-									<a href="/img/<%= comment.image%>"><img src="/uploads/<%=comment.image%>" class="img-thumbnail" style="float:left;"></a></i>
-								<% } %>
-								<span>
-									<% if(comment.author == "") {comment.author = "Anonymous";}%>
-									<%= comment.author%> 
-									<em><%= comment.date%></em>
-									No.<%= comment.postNo%> 
-									<form class="vthread" action="/threads/<%=thread._id%>/comments/<%= comment._id%>?_method=DELETE" method="POST">
-										<% if(currentUser) {%>
-											<button class="btn btn-xs btn-danger">Delete</button>
-										<% } %>
-									</form>
-								</span>
-								<p class="desc"><%=comment.description %></p>
-							</div>
-							<% } %>
 							<% usedThreads.push(threadNo);%>
 						<% } %>
 						<% if(threadNo != 0) {threadNo--;} %>
+						<hr>
 					<% }%>
 				<% }%>
 				<% } %>
