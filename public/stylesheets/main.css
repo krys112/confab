@@ -70,6 +70,7 @@ span {
 
 .desc { 
 	padding-left: 2em;
+	white-space: pre;
 	padding-top: 0.5em;
 }
 

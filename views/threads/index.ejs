@@ -32,7 +32,7 @@
 									No.<%= thread.postNo%>
 									<a href="/threads/<%= thread._id%>" class="btn btn-primary vthread">View Thread</a>
 								</span><br>
-								<span class=""><%=thread.description %></span>
+								<p class="desc"><%=thread.description %></p>
 								<% var i = (thread.comments.length - 4); 
 							if(i < 0) {i = 0; } %>
 							<% for(i; i < thread.comments.length; i++) {%>
@@ -81,7 +81,7 @@
 									No.<%= thread.postNo%>
 									<a href="/threads/<%= thread._id%>" class="btn btn-primary vthread">View Thread</a>
 								</span><br>
-								<span class=""><%=thread.description %></span>
+								<p class="desc"><%=thread.description %></p>
 							</div>
 							<% usedThreads.push(threadNo);%>
 						<% } %>

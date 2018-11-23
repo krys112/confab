@@ -26,7 +26,7 @@
 							<% } %>
 						</form>
 					</span><br>
-					<span class=""><%=thread.description %></span>
+					<p class="desc"><%=thread.description %></p>
 					<% thread.comments.forEach(function(comment) { %>
 					<div class="reply">
 						<span>
@@ -44,7 +44,7 @@
 									<a href="/img/<%= comment.image%>"><img src="/uploads/<%=comment.image%>" class="img-thumbnail" style="float:left;"></a></i>
 						<% } %>
 						<% var str = comment.description%>
-						<p id="link"><%=str %></p>
+						<p class="desc"><%=str %></p>
 
 						<!--
 						<% //var n = str.search(/>>[0-9]*/);%>
