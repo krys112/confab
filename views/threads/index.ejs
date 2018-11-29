@@ -29,7 +29,7 @@
 									<span class="subject"><%= thread.name%></span>
 									<span class="author"><%= thread.author%></span>
 									<em><%= thread.date %></em>
-									No.<%= thread.postNo%>
+									<a href="/threads/<%=thread._id%>/#p<%=thread.postNo%>">No.</a><a href="#" class="postNo"><%= thread.postNo%></a>
 									<a href="/threads/<%= thread._id%>" class="btn btn-primary vthread">View Thread</a>
 								</span><br>
 								<p class="desc"><%=thread.description %></p>
@@ -45,7 +45,7 @@
 									<% if(comment.author == "") {comment.author = "Anonymous";}%>
 									<span class="author"><%= comment.author%></span>
 									<em><%= comment.date%></em>
-									No.<%= comment.postNo%> 
+									<a href="/threads/<%=thread._id%>/#p<%=comment.postNo%>">No.</a><a href="#" class="postNo"><%= comment.postNo%></a>
 									<form class="vthread" action="/threads/<%=thread._id%>/comments/<%= comment._id%>?_method=DELETE" method="POST">
 										<% if(currentUser) {%>
 											<button class="fas fa-trash-alt"></button>
@@ -78,7 +78,7 @@
 									<span class="subject"><%= thread.name%></span>
 									<span class="author"><%= thread.author%></span>
 									<em><%= thread.date %></em>
-									No.<%= thread.postNo%>
+									<a href="/threads/<%=thread._id%>/#p<%=thread.postNo%>">No.</a><a href="#" class="postNo"><%= thread.postNo%></a>
 									<a href="/threads/<%= thread._id%>" class="btn btn-primary vthread">View Thread</a>
 								</span><br>
 								<p class="desc"><%=thread.description %></p>
@@ -92,3 +92,4 @@
 				<% } %>
 			</div>
 		</div>
+		<script src="/scripts/links.js"></script>

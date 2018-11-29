@@ -1,9 +1,10 @@
 <% include ../partials/header %>
+
 		<div class="wrapper">
 			<div class="side">
 			</div>
 			<div class="content"><h1>Viewing Thread</h1>
-				<div class="thread">
+				<div id=p<%=thread.postNo%> class="thread">
 					<% var size = (thread.size/1000).toFixed(1);%>
 					<% if(size>1000) {%>
 						<% size = (size/1000).toFixed(1);%>
@@ -19,7 +20,7 @@
 						<span class="subject"><%= thread.name%></span>
 						<span class="author"><%= thread.author%></span>
 						<em><%= thread.date %></em>
-						No.<%= thread.postNo%>
+						<a href="#p<%=thread.postNo%>">No.</a><a href="#" class="postNo"><%= thread.postNo%></a>
 						<form class="vthread" action="/threads/<%=thread._id%>?_method=DELETE" method="POST">
 							<% if(currentUser) {%>
 								<button class="btn btn-xs btn-danger">Delete Thread</button>
@@ -28,12 +29,12 @@
 					</span><br>
 					<p class="desc"><%=thread.description %></p>
 					<% thread.comments.forEach(function(comment) { %>
-					<div class="reply">
+					<div id=p<%=comment.postNo%> class="reply">
 						<span>
 							<% if(comment.author == "") {comment.author = "Anonymous";}%>
 							<span class="author"><%= comment.author%></span>
 							<em><%= comment.date%></em>
-							No.<%= comment.postNo%> 
+							<a href="#p<%=comment.postNo%>">No.</a><a href="#" class="postNo"><%= comment.postNo%></a> 
 							<form class="vthread" action="/threads/<%=thread._id%>/comments/<%= comment._id%>?_method=DELETE" method="POST">
 								<% if(currentUser) {%>
 									<button class="fas fa-trash-alt"></button>
@@ -56,9 +57,25 @@
 					</div>
 				<% }); %>
 				</div>
+				<div id="qreply">
+					Reply to Thread
+					<form action="/threads/<%= thread._id%>/comments" method="POST" enctype="multipart/form-data">
+						<div class="form-group">
+							<input class="form-control" type="text" placeholder="Anonymous" id="name" name="author">
+						</div>
+						<div class="form-group">
+							<input class="form-control" type="file" id="image" name="image">
+						</div>
+						<div class="form-group">
+							<textarea class="form-control" rows="5" id="desc" name="description" placeholder="Comment" required></textarea>
+						</div>
+						<button class="btn btn-lg btn-primary btn-block">Submit</button>
+					</form>
+				</div>
 
 				<a href=/threads/<%=thread._id%>/comments/new class="btn btn-primary">Reply</a>
 			</div>
 		</div>
+		<script src="/scripts/links.js"></script>
 			
 <% include ../partials/footer %>
