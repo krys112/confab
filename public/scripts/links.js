@@ -1,13 +1,18 @@
+// Detects whether a post has a hyperlink or quote to previous post, creates appropriate anchor if detected
 $('.desc').each(function() {
 	var $origin = $(this).text();
-	console.log($origin +" the original");
 	var $words = $(this).text().split(/(\s+)/g);
 	for (i in $words) {
 		console.log("index is "+$origin.indexOf('>>'));
-    	if ($words[i].indexOf('http://') == 0) {
+    	if ($words[i].indexOf('http') == 0) {
         	$words[i] = '<a href="' + $words[i] + '">' + $words[i] + '</a>';
     	} else if ($words[i].indexOf('>>') == 0) {
-    		$words[i] = '<a href="#p' + $words[i].substring(2) + '">' + $words[i] + '</a>';
+    		if($(".show").length) {
+    			var thread = $(this).attr('id');
+    			$words[i] = '<a class="link" href="/threads/' + thread + '/#p' + $words[i].substring(2) + '">' + $words[i] + '</a>';
+    		} else {
+    			$words[i] = '<a class="link" href="#p' + $words[i].substring(2) + '">' + $words[i] + '</a>';
+    		}
     	}
 	}
 	$(this).html($words.join(''));
@@ -17,8 +22,21 @@ $(document).ready(function() {
 	$(".postNo").click(function() {
 		var desc = $('#desc');
 		desc.val(desc.val() + '>>' + $(this).text() + '\n');
+		$('#qreply').removeClass('hide');
 		$('#desc').focus();
 	});
+	$("#creply").click(function() {
+		$('#qreply').addClass('hide');
+		$('#desc').val("");
+	});
+	$(".link").click(function() {
+		var href = $(this).attr('href');
+		var href = href.substring(1);
+		if(!$('#'+href).length) {
+			$(this).addClass('strike');
+		};
+	});
+
 });
 /*
 var replies = $(".description");

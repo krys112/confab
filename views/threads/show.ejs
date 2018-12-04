@@ -57,8 +57,8 @@
 					</div>
 				<% }); %>
 				</div>
-				<div id="qreply">
-					Reply to Thread
+				<div id="qreply" class="hide">
+					Reply to Thread<span id="creply" class="vthread">X</span>
 					<form action="/threads/<%= thread._id%>/comments" method="POST" enctype="multipart/form-data">
 						<div class="form-group">
 							<input class="form-control" type="text" placeholder="Anonymous" id="name" name="author">

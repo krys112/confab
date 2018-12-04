@@ -115,5 +115,14 @@ span {
 	right: 0px;
 	top: 10%;
 	position: fixed;
+	padding: 1em;
+	background: #ccc;
 }
 
+.hide {
+	display: none;
+}
+
+.strike {
+	text-decoration: line-through;
+}

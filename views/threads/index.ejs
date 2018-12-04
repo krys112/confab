@@ -8,7 +8,6 @@
 				<% var usedThreads = [];%>
 				<% var j;%>
 				<% for(var j = counter[0].totalPosts; j > 0; j--) {%>
-				<% console.log("j is" +j + " commentno is "+commentNo );%>
 					<% if(comments.length > 0 && comments[commentNo].postNo == j) {%>
 						<% var threadCount = counter[0].threadCounter;%>
 						<% var threadIndex = threadCount.indexOf(comments[commentNo].threadNo);%>
@@ -29,7 +28,7 @@
 									<span class="subject"><%= thread.name%></span>
 									<span class="author"><%= thread.author%></span>
 									<em><%= thread.date %></em>
-									<a href="/threads/<%=thread._id%>/#p<%=thread.postNo%>">No.</a><a href="#" class="postNo"><%= thread.postNo%></a>
+									<a href="/threads/<%=thread._id%>/#p<%=thread.postNo%>">No.<%= thread.postNo%></a>
 									<a href="/threads/<%= thread._id%>" class="btn btn-primary vthread">View Thread</a>
 								</span><br>
 								<p class="desc"><%=thread.description %></p>
@@ -45,18 +44,20 @@
 									<% if(comment.author == "") {comment.author = "Anonymous";}%>
 									<span class="author"><%= comment.author%></span>
 									<em><%= comment.date%></em>
-									<a href="/threads/<%=thread._id%>/#p<%=comment.postNo%>">No.</a><a href="#" class="postNo"><%= comment.postNo%></a>
+									<a href="/threads/<%=thread._id%>/#p<%=comment.postNo%>">No.<%= comment.postNo%></a>
 									<form class="vthread" action="/threads/<%=thread._id%>/comments/<%= comment._id%>?_method=DELETE" method="POST">
 										<% if(currentUser) {%>
 											<button class="fas fa-trash-alt"></button>
 										<% } %>
 									</form>
 								</span>
-								<p class="desc"><%=comment.description %></p>
+								<p class="desc" id=<%=thread._id%>><%=comment.description %></p>
 							</div>
 							<% } %>
+							
 							</div>
 							<hr>
+
 							<% usedThreads.push(threadIndex);%>
 						<% } %>
 						<% if(commentNo != 0) {commentNo--;} %>
@@ -78,17 +79,33 @@
 									<span class="subject"><%= thread.name%></span>
 									<span class="author"><%= thread.author%></span>
 									<em><%= thread.date %></em>
-									<a href="/threads/<%=thread._id%>/#p<%=thread.postNo%>">No.</a><a href="#" class="postNo"><%= thread.postNo%></a>
+									<a href="/threads/<%=thread._id%>/#p<%=thread.postNo%>">No.<%= thread.postNo%></a>
 									<a href="/threads/<%= thread._id%>" class="btn btn-primary vthread">View Thread</a>
 								</span><br>
 								<p class="desc"><%=thread.description %></p>
+
 							</div>
+							<hr>
 							<% usedThreads.push(threadNo);%>
 						<% } %>
 						<% if(threadNo != 0) {threadNo--;} %>
-						<hr>
 					<% }%>
 				<% }%>
+				<div id="qreply" class="hide">
+					Reply to Thread<span id="creply" class="vthread">X</span>
+					<form action="/threads/<%= thread._id%>/comments" method="POST" enctype="multipart/form-data">
+						<div class="form-group">
+							<input class="form-control" type="text" placeholder="Anonymous" id="name" name="author">
+						</div>
+						<div class="form-group">
+							<input class="form-control" type="file" id="image" name="image">
+						</div>
+						<div class="form-group">
+							<textarea class="form-control" rows="5" id="desc" name="description" placeholder="Comment" required></textarea>
+						</div>
+						<button class="btn btn-lg btn-primary btn-block">Submit</button>
+					</form>
+				</div>
 				<% } %>
 			</div>
 		</div>
