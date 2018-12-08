@@ -13,7 +13,7 @@
 						<% var threadIndex = threadCount.indexOf(comments[commentNo].threadNo);%>
 						<% if(!usedThreads.includes(threadIndex) && threadIndex >= 0) {%>
 							<% var thread = threads[threadIndex];%>	
-							<div class="thread">
+							<div class="thread hidden">
 								<% var size = (thread.size/1000).toFixed(1);%>
 								<% if(size>1000) {%>
 									<% size = (size/1000).toFixed(1);%>
@@ -21,7 +21,6 @@
 								<% } else { var unit = "KB"; }%>
 								<span>File: <a href="/img/<%=thread.myimage%>"><%= thread.filename%></a> (<%=thread.width%>x<%=thread.height%>, <%=size%> <%=unit%>)</span><br>
 								<% var number = thread.size%>
-								<% console.log("kb size is "+(number/1000).toFixed(1));%>
 								<a href="/img/<%= thread.myimage%>"><img src="/uploads/<%= thread.myimage%>" class="img-thumbnail" style="float:left;"></a></i>
 								<span>
 									<% if(thread.author == "") {thread.author = "Anonymous";}%> 
@@ -32,7 +31,8 @@
 									<a href="/threads/<%= thread._id%>" class="btn btn-primary vthread">View Thread</a>
 								</span><br>
 								<p class="desc"><%=thread.description %></p>
-								<% var i = (thread.comments.length - 4); 
+								<span class="expand">extend</span>
+								<% var i = (/*thread.comments.length - 4*/ 0); 
 							if(i < 0) {i = 0; } %>
 							<% for(i; i < thread.comments.length; i++) {%>
 							<div class="reply">
@@ -62,6 +62,7 @@
 						<% } %>
 						<% if(commentNo != 0) {commentNo--;} %>
 					<% } else if(threads[threadNo].postNo == j){%>
+						<% console.log("thread route "+j);%>
 						<% if(!usedThreads.includes(threadNo)) {%>
 							<% var thread = threads[threadNo];%>
 							<div class="thread">

@@ -126,3 +126,15 @@ span {
 .strike {
 	text-decoration: line-through;
 }
+
+.hidden > .reply {
+	display: none;
+}
+
+.hidden > .reply:nth-last-child(-n+4) {
+	display: table;
+}
+
+.visible > .reply {
+	display: table;
+}

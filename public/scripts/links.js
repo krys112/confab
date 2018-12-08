@@ -3,7 +3,6 @@ $('.desc').each(function() {
 	var $origin = $(this).text();
 	var $words = $(this).text().split(/(\s+)/g);
 	for (i in $words) {
-		console.log("index is "+$origin.indexOf('>>'));
     	if ($words[i].indexOf('http') == 0) {
         	$words[i] = '<a href="' + $words[i] + '">' + $words[i] + '</a>';
     	} else if ($words[i].indexOf('>>') == 0) {
@@ -25,6 +24,10 @@ $(document).ready(function() {
 		$('#qreply').removeClass('hide');
 		$('#desc').focus();
 	});
+	$("#reply_button").click(function() {
+		$('#qreply').removeClass('hide');
+		$('#desc').focus();
+	})
 	$("#creply").click(function() {
 		$('#qreply').addClass('hide');
 		$('#desc').val("");
@@ -35,6 +38,9 @@ $(document).ready(function() {
 		if(!$('#'+href).length) {
 			$(this).addClass('strike');
 		};
+	});
+	$(".expand").click(function() {
+		$(this).parent().toggleClass('visible');
 	});
 
 });
