@@ -16,7 +16,7 @@ var threadRoutes	= require("./routes/threads");
 var commentRoutes	= require("./routes/comments");
 
 // MongoDB and general configuration
-mongoose.connect("mongodb://krys112:biomadkip1@ds037047.mlab.com:37047/heroku_s5tnm0tv");
+mongoose.connect("mongodb://localhost/confab");
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
 app.use(express.static("public"));
@@ -25,7 +25,7 @@ app.use(flash());
 
 // Passport configuration
 app.use(require("express-session")({
-	secret: "Once again rusty wins",
+	secret: //edit,
 	resave: false,
 	saveUninitialized: false
 }));
