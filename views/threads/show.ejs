@@ -57,9 +57,14 @@
 					</div>
 				<% }); %>
 				</div>
+				<div id="smallreply">
+				
 				<div id="qreply" class="hide">
+					<div id="overlay" class="hide">
+					<div id="text">Thread has reached post limit</div>
+				</div>
+					<form id="replyform" action="/threads/<%= thread._id%>/comments" method="POST" enctype="multipart/form-data">
 					Reply to Thread<span id="creply" class="vthread">X</span>
-					<form action="/threads/<%= thread._id%>/comments" method="POST" enctype="multipart/form-data">
 						<div class="form-group">
 							<input class="form-control" type="text" placeholder="Anonymous" id="name" name="author">
 						</div>
@@ -71,6 +76,7 @@
 						</div>
 						<button class="btn btn-lg btn-primary btn-block">Submit</button>
 					</form>
+				</div>
 				</div>
 
 				<a id="reply_button" href=# class="btn btn-primary">Reply</a>

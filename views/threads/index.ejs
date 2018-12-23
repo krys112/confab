@@ -31,7 +31,12 @@
 									<a href="/threads/<%= thread._id%>" class="btn btn-primary vthread">View Thread</a>
 								</span><br>
 								<p class="desc"><%=thread.description %></p>
-								<span class="expand">extend</span>
+								
+								<% var replyNum = thread.comments.length - 4;%>
+								<% if(replyNum > 0) { %>
+									<button class="far fa-plus-square expand"></button>
+									<span class="omitReply" data-replynum="<%=replyNum%>"><%=replyNum%> replies omitted</span>
+								<% } %>
 								<% var i = (/*thread.comments.length - 4*/ 0); 
 							if(i < 0) {i = 0; } %>
 							<% for(i; i < thread.comments.length; i++) {%>

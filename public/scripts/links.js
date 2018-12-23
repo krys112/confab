@@ -20,13 +20,17 @@ $('.desc').each(function() {
 $(document).ready(function() {
 	$(".postNo").click(function() {
 		var desc = $('#desc');
-		desc.val(desc.val() + '>>' + $(this).text() + '\n');
 		$('#qreply').removeClass('hide');
-		$('#desc').focus();
+		if($('#overlay').attr('class') == 'hide') {
+			desc.val(desc.val() + '>>' + $(this).text() + '\n');
+			$('#desc').focus();
+		};
 	});
 	$("#reply_button").click(function() {
 		$('#qreply').removeClass('hide');
-		$('#desc').focus();
+		if($('#overlay').attr('class') == 'hide') {
+			$('#desc').focus();
+		};
 	})
 	$("#creply").click(function() {
 		$('#qreply').addClass('hide');
@@ -41,6 +45,24 @@ $(document).ready(function() {
 	});
 	$(".expand").click(function() {
 		$(this).parent().toggleClass('visible');
+		$(this).toggleClass('fa-plus-square');
+		$(this).toggleClass('fa-minus-square');
+		if($(this).hasClass('fa-plus-square')) {
+			var reply = $(this).next().attr('data-replynum');
+			$(this).next().text(reply +' replies omitted');
+		} else {
+			$(this).next().text('Showing all replies');
+		}
+	});
+
+	var num = $(".reply").length;
+	if(num > 4) {
+		$('#overlay').removeClass('hide');
+	}
+
+	$(".author").click(function() {
+		$('#overlay').removeClass('hide');
+		console.log("this works");
 	});
 
 });
