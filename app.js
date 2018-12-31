@@ -15,8 +15,14 @@ var indexRoutes		= require("./routes/index");
 var threadRoutes	= require("./routes/threads");
 var commentRoutes	= require("./routes/comments");
 
+if(process.env.DATABASEURL == null) {
+	process.env.DATABASEURL = 'mongodb://localhost/confab';
+}
+console.log(process.env.DATABASEURL);
 // MongoDB and general configuration
-mongoose.connect("mongodb://localhost/confab");
+mongoose.connect(process.env.DATABASEURL);
+//mongoose.connect("mongodb://localhost/confab");
+
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
 app.use(express.static("public"));
@@ -25,7 +31,7 @@ app.use(flash());
 
 // Passport configuration
 app.use(require("express-session")({
-	secret: //edit,
+	secret: 'nice project there',
 	resave: false,
 	saveUninitialized: false
 }));
