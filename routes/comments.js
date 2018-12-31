@@ -35,9 +35,13 @@ router.post("/", uploading.single('image'), function(req, res) {
 	}
 	var desc = req.body.description;
 	Thread.findById(req.params.id, function(err, thread) {
+		if(thread.comments.length > 5) {
+			err = "Post limit has been reached";
+			req.flash("error", "Post limit has been reached for this thread");
+		}
 		if(err) {
 			console.log(err);
-			res.redirect("/threads");
+			res.redirect("/threads/" + req.params.id);
 		} else {
 			Counter.find({}).exec(function(err, number) {
 				if(err) {
