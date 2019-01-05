@@ -15,13 +15,10 @@ var indexRoutes		= require("./routes/index");
 var threadRoutes	= require("./routes/threads");
 var commentRoutes	= require("./routes/comments");
 
-if(process.env.DATABASEURL == null) {
-	process.env.DATABASEURL = 'mongodb://localhost/confab';
-}
-console.log(process.env.DATABASEURL);
 // MongoDB and general configuration
-mongoose.connect(process.env.DATABASEURL);
-//mongoose.connect("mongodb://localhost/confab");
+var url = process.env.DATABASEURL || 'mongodb://localhost/confab';
+console.log(process.env.DATABASEURL);
+mongoose.connect(url);
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
