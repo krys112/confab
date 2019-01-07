@@ -123,6 +123,28 @@ router.get("/:id", function(req, res) {
 	});
 });
 
+router.post("/:id", function(req, res) {
+	var newSticky;
+	Thread.findById(req.params.id).exec(function(err, foundThread) {
+		if(err) {
+			console.log(err);
+		} else {
+			if(foundThread.sticky) {
+				newSticky = false;
+			} else {
+				newSticky = true;
+			}
+			foundThread.updateOne({sticky: newSticky}, function(err, post) {
+				if(err) {
+					console.log(err);
+				} else {
+					res.redirect("/threads");
+				}
+			});
+		}
+	});
+});
+
 // Route used to delete a given thread using its id, middleware to check if user is logged in (admin)
 router.delete("/:id", middleware.isLoggedIn, function(req, res) {
 	Thread.findById(req.params.id).exec(function(err, foundThread) {

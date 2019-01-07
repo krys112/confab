@@ -26,6 +26,11 @@
 								<button class="btn btn-xs btn-danger">Delete Thread</button>
 							<% } %>
 						</form>
+						<form class="vthread" action="/threads/<%=thread._id%>" method="POST">
+							<% if(currentUser) {%>
+								<button class="btn btn-xs btn-danger">Sticky Thread</button>
+							<% } %>
+						</form>
 					</span><br>
 					<p class="desc"><%=thread.description %></p>
 					<% thread.comments.forEach(function(comment) { %>

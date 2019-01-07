@@ -16,7 +16,8 @@ var threadSchema = new mongoose.Schema({
 			type: mongoose.Schema.Types.ObjectId,
 			ref: "Comment"
 		}
-	]
+	],
+	sticky: Boolean
 });
 
 module.exports = mongoose.model("Thread", threadSchema);

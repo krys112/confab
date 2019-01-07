@@ -13,7 +13,7 @@
 						<% var threadIndex = threadCount.indexOf(comments[commentNo].threadNo);%>
 						<% if(!usedThreads.includes(threadIndex) && threadIndex >= 0) {%>
 							<% var thread = threads[threadIndex];%>	
-							<div class="thread hidden">
+							<div id="thread" class="thread hidden" data-sticky="<%=thread.sticky%>">
 								<% var size = (thread.size/1000).toFixed(1);%>
 								<% if(size>1000) {%>
 									<% size = (size/1000).toFixed(1);%>
@@ -28,6 +28,9 @@
 									<span class="author"><%= thread.author%></span>
 									<em><%= thread.date %></em>
 									<a href="/threads/<%=thread._id%>/#p<%=thread.postNo%>">No.<%= thread.postNo%></a>
+									<% if(thread.sticky) {%>
+										<i class="fas fa-thumbtack"></i>
+									<% } %>
 									<a href="/threads/<%= thread._id%>" class="btn btn-primary vthread">View Thread</a>
 								</span><br>
 								<p class="desc"><%=thread.description %></p>
@@ -67,7 +70,6 @@
 						<% } %>
 						<% if(commentNo != 0) {commentNo--;} %>
 					<% } else if(threads[threadNo].postNo == j){%>
-						<% console.log("thread route "+j);%>
 						<% if(!usedThreads.includes(threadNo)) {%>
 							<% var thread = threads[threadNo];%>
 							<div class="thread">
@@ -78,7 +80,6 @@
 								<% } else { var unit = "KB"; }%>
 								<span>File: <a href="/img/<%=thread.myimage%>"><%= thread.filename%></a> (<%=thread.width%>x<%=thread.height%>, <%=size%> <%=unit%>)</span><br>
 								<% var number = thread.size%>
-								<% console.log("kb size is "+(number/1000).toFixed(1));%>
 								<a href="/img/<%= thread.myimage%>"><img src="/uploads/<%= thread.myimage%>" class="img-thumbnail" style="float:left;"></a></i>
 								<span>
 									<% if(thread.author == "") {thread.author = "Anonymous";}%> 

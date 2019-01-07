@@ -64,7 +64,13 @@ $(document).ready(function() {
 		$('#overlay').removeClass('hide');
 		console.log("this works");
 	});
-
+	$(".thread").each(function() {
+		if($(this).attr('data-sticky') == 'true') {
+			console.log("not true?");
+			$(this).insertBefore('#thread');
+		};
+	});
+	
 });
 /*
 var replies = $(".description");
