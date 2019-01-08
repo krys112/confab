@@ -75,6 +75,9 @@ span {
 	background: #d6d4d3;
 }
 .vthread {
+	float: right;
+}
+.athread {
 	float: left;
 	padding-left: 0.5em;
 	padding-right: 0.5em;

@@ -17,17 +17,17 @@
 					<a href="<%= thread.image%>"><img src="<%= thread.image %>" class="img-thumbnail" style="float:left;"></a>
 					<a href="/img/<%= thread.myimage%>"><img src="/uploads/<%= thread.myimage%>" class="img-thumbnail" style="float:left;"></a></i>
 					<span>
-						<form class="vthread" action="/threads/<%=thread._id%>?_method=DELETE" method="POST">
-							<% if(currentUser) {%>
+						<% if(currentUser) {%>
+							<form class="athread" action="/threads/<%=thread._id%>?_method=DELETE" method="POST">
 								<button class="btn btn-xs btn-danger">Delete Thread</button>
-							<% } %>
-						</form> 
-						<form class="vthread" action="/threads/<%=thread._id%>" method="POST">
-							<% if(currentUser) {%>
-								<button class="btn btn-xs btn-danger">Sticky Thread</button>
-							<% } %>
-						</form>
-						<br> <br>
+							</form> 
+							<form class="athread" action="/threads/<%=thread._id%>" method="POST">
+								<% var sButton = 'Sticky Thread'; %>
+								<% if(thread.sticky) {sButton = 'Unsticky Thread';}%>
+								<button class="btn btn-xs btn-danger"><%=sButton%></button>
+							</form>
+							<br> <br>
+						<% } %>
 						<% if(thread.author == "") {thread.author = "Anonymous";}%> 
 						<span class="subject"><%= thread.name%></span>
 						<span class="author"><%= thread.author%></span>
