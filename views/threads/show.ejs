@@ -4,6 +4,7 @@
 			<div class="side">
 			</div>
 			<div class="content"><h1>Viewing Thread</h1>
+				
 				<div id=p<%=thread.postNo%> class="thread">
 					<% var size = (thread.size/1000).toFixed(1);%>
 					<% if(size>1000) {%>
@@ -16,21 +17,25 @@
 					<a href="<%= thread.image%>"><img src="<%= thread.image %>" class="img-thumbnail" style="float:left;"></a>
 					<a href="/img/<%= thread.myimage%>"><img src="/uploads/<%= thread.myimage%>" class="img-thumbnail" style="float:left;"></a></i>
 					<span>
-						<% if(thread.author == "") {thread.author = "Anonymous";}%> 
-						<span class="subject"><%= thread.name%></span>
-						<span class="author"><%= thread.author%></span>
-						<em><%= thread.date %></em>
-						<a href="#p<%=thread.postNo%>">No.</a><a href="#" class="postNo"><%= thread.postNo%></a>
 						<form class="vthread" action="/threads/<%=thread._id%>?_method=DELETE" method="POST">
 							<% if(currentUser) {%>
 								<button class="btn btn-xs btn-danger">Delete Thread</button>
 							<% } %>
-						</form>
+						</form> 
 						<form class="vthread" action="/threads/<%=thread._id%>" method="POST">
 							<% if(currentUser) {%>
 								<button class="btn btn-xs btn-danger">Sticky Thread</button>
 							<% } %>
 						</form>
+						<br> <br>
+						<% if(thread.author == "") {thread.author = "Anonymous";}%> 
+						<span class="subject"><%= thread.name%></span>
+						<span class="author"><%= thread.author%></span>
+						<em><%= thread.date %></em>
+						<a href="#p<%=thread.postNo%>">No.</a><a href="#" class="postNo"><%= thread.postNo%></a>
+						<% if(thread.sticky) {%>
+										<i class="fas fa-thumbtack"></i>
+									<% } %>
 					</span><br>
 					<p class="desc"><%=thread.description %></p>
 					<% thread.comments.forEach(function(comment) { %>

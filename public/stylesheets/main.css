@@ -75,7 +75,9 @@ span {
 	background: #d6d4d3;
 }
 .vthread {
-	float: right;
+	float: left;
+	padding-left: 0.5em;
+	padding-right: 0.5em;
 }
 #center {
 	display: block;
@@ -108,6 +110,16 @@ span {
 
 .fa-thumbtack {
 	color: #007BFF;
+}
+
+.fa-plus-square {
+	border: none;
+	background: none;
+}
+
+.fa-minus-square {
+	border: none;
+	background: none;
 }
 
 #qreply {
